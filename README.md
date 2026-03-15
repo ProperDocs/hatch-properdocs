@@ -3,8 +3,8 @@
 **[Hatch] plugin to integrate [MkDocs] and infer dependencies into an env**
 
 [![PyPI](https://img.shields.io/pypi/v/hatch-mkdocs)](https://pypi.org/project/hatch-mkdocs/)
-[![License](https://img.shields.io/github/license/mkdocs/hatch-mkdocs)](https://github.com/mkdocs/hatch-mkdocs/blob/master/LICENSE.md)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/mkdocs/hatch-mkdocs/ci.yml.svg)](https://github.com/mkdocs/hatch-mkdocs/actions?query=event%3Apush+branch%3Amaster)
+[![License](https://img.shields.io/github/license/mkdocs/hatch-mkdocs)](https://github.com/ProperDocs/hatch-properdocs/blob/master/LICENSE.md)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ProperDocs/hatch-properdocs/ci.yml.svg)](https://github.com/ProperDocs/hatch-properdocs/actions?query=event%3Apush+branch%3Amaster)
 
 This plugin populates [Hatch] environments with `dependencies` on the fly based on a [`mkdocs.yml`] file.
 
@@ -69,7 +69,7 @@ gh-deploy = "mkdocs gh-deploy -f mkdocs.yml {args}"
 
 With this:
 
-* You don't need to specify the PyPI dependencies, they get inferred on the fly just from [`mkdocs.yml`] by doing a reverse lookup of MkDocs plugins in the [catalog], using [`mkdocs get-deps`]. (See more details there)
+* You don't need to specify the PyPI dependencies, they get inferred on the fly just from [`mkdocs.yml`] by doing a reverse lookup of MkDocs plugins in the [catalog], using [`properdocs get-deps`]. (See more details there)
 
 * An automatically managed virtual environment with pre-defined MkDocs commands is at your fingertips.
 
@@ -188,8 +188,8 @@ Inside `[envs.ENV_NAME]` (which is an ordinary construct in Hatch) you can proce
 
 [MkDocs]: https://github.com/mkdocs/mkdocs
 [`mkdocs.yml`]: https://www.mkdocs.org/user-guide/configuration/
-[`mkdocs get-deps`]: https://github.com/mkdocs/get-deps
-[catalog]: https://github.com/mkdocs/catalog
+[`properdocs get-deps`]: https://github.com/ProperDocs/get-deps
+[catalog]: https://github.com/ProperDocs/catalog
 [Hatch]: https://hatch.pypa.io/
 [install Hatch]: https://hatch.pypa.io/latest/install/#pip
 [installing `pipx`]: https://pypa.github.io/pipx/installation/
