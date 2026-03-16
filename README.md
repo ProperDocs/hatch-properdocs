@@ -1,34 +1,34 @@
-# hatch-mkdocs
+# hatch-properdocs
 
-**[Hatch] plugin to integrate [MkDocs] and infer dependencies into an env**
+**[Hatch] plugin to integrate [ProperDocs] and infer dependencies into an env**
 
-[![PyPI](https://img.shields.io/pypi/v/hatch-mkdocs)](https://pypi.org/project/hatch-mkdocs/)
-[![License](https://img.shields.io/github/license/mkdocs/hatch-mkdocs)](https://github.com/ProperDocs/hatch-properdocs/blob/master/LICENSE.md)
+[![PyPI](https://img.shields.io/pypi/v/hatch-properdocs)](https://pypi.org/project/hatch-properdocs/)
+[![License](https://img.shields.io/github/license/properdocs/hatch-properdocs)](https://github.com/ProperDocs/hatch-properdocs/blob/master/LICENSE.md)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ProperDocs/hatch-properdocs/ci.yml.svg)](https://github.com/ProperDocs/hatch-properdocs/actions?query=event%3Apush+branch%3Amaster)
 
-This plugin populates [Hatch] environments with `dependencies` on the fly based on a [`mkdocs.yml`] file.
+This plugin populates [Hatch] environments with `dependencies` on the fly based on a [`properdocs.yml`] file.
 
-This is intended to effortlessly manage dependencies for a MkDocs site.
+This is intended to effortlessly manage dependencies for a ProperDocs site.
 
-You just need to add this minimal config to Hatch, along with any existing MkDocs config:
+You just need to add this minimal config to Hatch, along with any existing ProperDocs config:
 
-<table><tr><th><code>hatch.toml</code></th><th><code>mkdocs.yml</code></th></tr>
+<table><tr><th><code>hatch.toml</code></th><th><code>properdocs.yml</code></th></tr>
 <tr><td>
 
 ```toml
 [env]
 requires = [
-    "hatch-mkdocs",
+    "hatch-properdocs",
 ]
 
-[env.collectors.mkdocs.docs]
-path = "mkdocs.yml"
+[env.collectors.properdocs.docs]
+path = "properdocs.yml"
 ```
 
 </td><td>
 
 ```yaml
-site_name: MkDocs example
+site_name: ProperDocs example
 
 plugins:
   - autorefs
@@ -50,15 +50,15 @@ markdown_extensions:
 detached = true
 dependencies = [
     "markdown-callouts",
-    "mkdocs",
     "mkdocs-autorefs",
+    "properdocs",
     "pymdown-extensions",
 ]
 
 [envs.docs.scripts]
-build = "mkdocs build -f mkdocs.yml {args}"
-serve = "mkdocs serve -f mkdocs.yml {args}"
-gh-deploy = "mkdocs gh-deploy -f mkdocs.yml {args}"
+build = "properdocs build -f properdocs.yml {args}"
+serve = "properdocs serve -f properdocs.yml {args}"
+gh-deploy = "properdocs gh-deploy -f properdocs.yml {args}"
 ```
 
 </td></tr></table>
@@ -69,9 +69,9 @@ gh-deploy = "mkdocs gh-deploy -f mkdocs.yml {args}"
 
 With this:
 
-* You don't need to specify the PyPI dependencies, they get inferred on the fly just from [`mkdocs.yml`] by doing a reverse lookup of MkDocs plugins in the [catalog], using [`properdocs get-deps`]. (See more details there)
+* You don't need to specify the PyPI dependencies, they get inferred on the fly just from [`properdocs.yml`] by doing a reverse lookup of ProperDocs plugins in the [catalog], using [`properdocs get-deps`]. (See more details there)
 
-* An automatically managed virtual environment with pre-defined MkDocs commands is at your fingertips.
+* An automatically managed virtual environment with pre-defined ProperDocs commands is at your fingertips.
 
 You can check this yourself:
 
@@ -83,8 +83,8 @@ You can check this yourself:
 │ Name │ Type    │ Dependencies       │ Scripts   │
 ├──────┼─────────┼────────────────────┼───────────┤
 │ docs │ virtual │ markdown-callouts  │ build     │
-│      │         │ mkdocs             │ gh-deploy │
-│      │         │ mkdocs-autorefs    │ serve     │
+│      │         │ mkdocs-autorefs    │ gh-deploy │
+│      │         │ properdocs         │ serve     │
 │      │         │ pymdown-extensions │           │
 └──────┴─────────┴────────────────────┴───────────┘
 ```
@@ -106,9 +106,9 @@ INFO    -  Documentation built in 0.03 seconds
 
 </details>
 
-(If you've been using virtualenvs directly, this single command replaces creating an environment, installing dependencies into it, as well as running `mkdocs` in it, optionally with arguments)
+(If you've been using virtualenvs directly, this single command replaces creating an environment, installing dependencies into it, as well as running `properdocs` in it, optionally with arguments)
 
-Furthermore, whenever the set of dependencies changes (i.e. you select new MkDocs plugins), these Hatch commands will re-install dependencies as necessary.  
+Furthermore, whenever the set of dependencies changes (i.e. you select new ProperDocs plugins), these Hatch commands will re-install dependencies as necessary.  
 Otherwise, the environment is just reused; the installation happens only on the first invocation.
 
 If at any point you want to make sure the dependencies are re-installed anew, you can just remove the environment:
@@ -128,15 +128,15 @@ Just [install Hatch]. Ideally in an isolated way with **`pipx install hatch`** (
 
 </details>
 
-If you declare `hatch-mkdocs` as a dependency in your Hatch config (`pyproject.toml` or `hatch.toml`) as shown above, Hatch will automatically install it on first use.
+If you declare `hatch-properdocs` as a dependency in your Hatch config (`pyproject.toml` or `hatch.toml`) as shown above, Hatch will automatically install it on first use.
 
-Alternatively you can install it manually: `pipx inject hatch hatch-mkdocs` or just `pip install hatch-mkdocs`.
+Alternatively you can install it manually: `pipx inject hatch hatch-properdocs` or just `pip install hatch-properdocs`.
 
-And do *not* install MkDocs - it's unnecessary, only the sub-environments will have it.
+And do *not* install ProperDocs - it's unnecessary, only the sub-environments will have it.
 
 ## Configuration
 
-Note that although Hatch is typically associated with managing entire Python projects and applications, you *can* use it purely for environment management for a MkDocs site - through this plugin, or even without it.
+Note that although Hatch is typically associated with managing entire Python projects and applications, you *can* use it purely for environment management for a ProperDocs site - through this plugin, or even without it.
 
 Hatch can be configured through one of two files - `hatch.toml` or `pyproject.toml`. Configs in the latter are equivalent but will always need a `[tool.hatch...]` prefix; it can be used if you have an existing Python project and you don't want to add another config file.
 
@@ -148,11 +148,11 @@ So, add the following into one of the files:
 ```toml
 [env]
 requires = [
-    "hatch-mkdocs",
+    "hatch-properdocs",
 ]
 
-[env.collectors.mkdocs.ENV_NAME]
-path = "path/to/mkdocs.yml"
+[env.collectors.properdocs.ENV_NAME]
+path = "path/to/properdocs.yml"
 
 [envs.ENV_NAME]
 ...
@@ -163,11 +163,11 @@ path = "path/to/mkdocs.yml"
 ```toml
 [tool.hatch.env]
 requires = [
-    "hatch-mkdocs"
+    "hatch-properdocs"
 ]
 
-[tool.hatch.env.collectors.mkdocs.ENV_NAME]
-path = "path/to/mkdocs.yml"
+[tool.hatch.env.collectors.properdocs.ENV_NAME]
+path = "path/to/properdocs.yml"
 
 [tool.hatch.envs.ENV_NAME]
 ...
@@ -175,19 +175,19 @@ path = "path/to/mkdocs.yml"
 
 </td></tr></table>
 
-Here, `[env.collectors.mkdocs.ENV_NAME]` means: please populate an environment named "ENV_NAME" based on an MkDocs config. In that section, `path` is the path to `mkdocs.yml`.
+Here, `[env.collectors.properdocs.ENV_NAME]` means: please populate an environment named "ENV_NAME" based on an ProperDocs config. In that section, `path` is the path to `properdocs.yml`.
 
 At the moment that is the entire configurability of this plugin.
 
-In the first example we used "docs" as the environment name, you can use "mkdocs" as well if you like, or anything else. Further, if you use "default" as the name (which you might do if documentation building is all that you'll ever use Hatch for) then you can skip the environment prefix (`docs:` in the above example).
+In the first example we used "docs" as the environment name, you can use "properdocs" as well if you like, or anything else. Further, if you use "default" as the name (which you might do if documentation building is all that you'll ever use Hatch for) then you can skip the environment prefix (`docs:` in the above example).
 
 Multiple separate environments with their own configs and dependencies can be populated as well.
 
 Inside `[envs.ENV_NAME]` (which is an ordinary construct in Hatch) you can proceed to further customize the environment (though normally it shouldn't be necessary, and the section can be omitted from the text config): you can add extra [`dependencies`] or [`scripts`], or any other environment config. You could also set [`detached`] back to `false` if the documentation actually relies on the project itself being installed, such as in the case of [mkdocstrings].
 
 
-[MkDocs]: https://github.com/mkdocs/mkdocs
-[`mkdocs.yml`]: https://www.mkdocs.org/user-guide/configuration/
+[ProperDocs]: https://github.com/ProperDocs/properdocs
+[`properdocs.yml`]: https://properdocs.org/user-guide/configuration/
 [`properdocs get-deps`]: https://github.com/ProperDocs/get-deps
 [catalog]: https://github.com/ProperDocs/catalog
 [Hatch]: https://hatch.pypa.io/

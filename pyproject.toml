@@ -3,11 +3,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "hatch-mkdocs"
-description = "Plugin for Hatch to infer env dependencies from mkdocs.yml"
+name = "hatch-properdocs"
+description = "Plugin for Hatch to infer env dependencies from properdocs.yml"
 readme = "README.md"
 license = "MIT"
-keywords = ["mkdocs"]
+keywords = ["properdocs"]
 authors = [
     {name = "Oleh Prypin", email = "oleh@pryp.in"},
 ]
@@ -35,23 +35,23 @@ dynamic = ["version"]
 requires-python = ">=3.9"
 dependencies = [
     "hatch >=1.6.0",
-    "mkdocs-get-deps >=0.2.0",
+    "properdocs",
 ]
 
 [project.urls]
-Documentation = "https://github.com/mkdocs/hatch-mkdocs#readme"
-Source = "https://github.com/mkdocs/hatch-mkdocs"
-Issues = "https://github.com/mkdocs/hatch-mkdocs/issues"
-History = "https://github.com/mkdocs/hatch-mkdocs/releases"
+Documentation = "https://github.com/ProperDocs/hatch-properdocs#readme"
+Source = "https://github.com/ProperDocs/hatch-properdocs"
+Issues = "https://github.com/ProperDocs/hatch-properdocs/issues"
+History = "https://github.com/ProperDocs/hatch-properdocs/releases"
 
 [project.entry-points.hatch]
-hatch-mkdocs = "hatch_mkdocs.hatch_hooks"
+hatch-properdocs = "hatch_properdocs.hatch_hooks"
 
 [tool.hatch.version]
-path = "hatch_mkdocs/__init__.py"
+path = "hatch_properdocs/__init__.py"
 
 [tool.hatch.build.targets.sdist]
-include = ["/hatch_mkdocs"]
+include = ["/hatch_properdocs"]
 
 [tool.hatch.env]
 requires = ["hatch-pip-compile >=1.7.0"]
@@ -67,7 +67,7 @@ dependencies = [
     "mypy",
 ]
 [tool.hatch.envs.types.scripts]
-check = "mypy {args} hatch_mkdocs"
+check = "mypy {args} hatch_properdocs"
 
 [tool.hatch.envs.style]
 type = "pip-compile"
@@ -76,8 +76,8 @@ dependencies = [
     "ruff",
 ]
 [tool.hatch.envs.style.scripts]
-check = "ruff check hatch_mkdocs {args}"
-format = "ruff format -q hatch_mkdocs"
+check = "ruff check hatch_properdocs {args}"
+format = "ruff format -q hatch_properdocs"
 fix = [
     "check --fix --unsafe-fixes",
     "format",

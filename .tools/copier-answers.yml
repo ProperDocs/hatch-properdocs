@@ -2,11 +2,11 @@ _commit: 1c7686408
 _src_path: gh:oprypin/py-project-template
 copyright_date: '2023'
 mkdocs: false
-project_description: Hatch plugin to integrate MkDocs and infer dependencies into an env
-project_name: hatch-mkdocs
+project_description: Hatch plugin to integrate ProperDocs and infer dependencies into an env
+project_name: hatch-properdocs
 pytest: false
-python_distribution_name: hatch-mkdocs
+python_distribution_name: hatch-properdocs
 python_source_path: hatch_mkdocs
-repository_name: mkdocs/hatch-mkdocs
+repository_name: properdocs/hatch-properdocs
 script_test: false
 

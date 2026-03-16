@@ -1,13 +1,13 @@
 from hatch.env.collectors.plugin.interface import EnvironmentCollectorInterface
-from mkdocs_get_deps import get_deps
+from properdocs.commands.get_deps import get_deps
 
 
 class MkDocsEnvironmentCollector(EnvironmentCollectorInterface):
-    PLUGIN_NAME = "mkdocs"
+    PLUGIN_NAME = "properdocs"
 
     def finalize_config(self, config: dict[str, dict]) -> None:
         for env_name, plugin_env_entry in self.config.items():
-            path = plugin_env_entry.get("path", "mkdocs.yml")
+            path = plugin_env_entry.get("path", "properdocs.yml")
 
             deps = get_deps(config_file=self.root / path)
             env = config.setdefault(env_name, {})
@@ -17,6 +17,6 @@ class MkDocsEnvironmentCollector(EnvironmentCollectorInterface):
             env.setdefault("detached", True)
 
             scripts_config = env.setdefault("scripts", {})
-            scripts_config.setdefault("build", f"mkdocs build -f {path} {{args}}")
-            scripts_config.setdefault("serve", f"mkdocs serve -f {path} {{args}}")
-            scripts_config.setdefault("gh-deploy", f"mkdocs gh-deploy -f {path} {{args}}")
+            scripts_config.setdefault("build", f"properdocs build -f {path} {{args}}")
+            scripts_config.setdefault("serve", f"properdocs serve -f {path} {{args}}")
+            scripts_config.setdefault("gh-deploy", f"properdocs gh-deploy -f {path} {{args}}")
